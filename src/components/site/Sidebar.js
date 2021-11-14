@@ -10,6 +10,8 @@ import JSXRules from '../concepts/JSXRules';
 import State from '../concepts/State';
 import Effects from '../concepts/Effects';
 import PropsDemo from '../concepts/PropsDemo';
+import Hooks from '../concepts/Hooks';
+import TimePiecesApp from '../apps/timer-apps/TimePiecesApp';
 
 const Sidebar = () => {
     return(
@@ -23,6 +25,8 @@ const Sidebar = () => {
                     <li><Link to='/state'>State</Link></li>
                     <li><Link to='/effects'>Effects</Link></li>
                     <li><Link to='/propsdemo'>Props Demo</Link></li>
+                    <li><Link to='/hooks'>Hooks</Link></li>
+                    <li><Link to='/timer'>Timers</Link></li>
                 </ul>
             </div>
             <div className='sidebar-route'>
@@ -35,6 +39,8 @@ const Sidebar = () => {
                     <Route exact path='/state' element={<State />} />
                     <Route exact path='/effects' element={<Effects />} />
                     <Route exact path='/propsdemo' element={<PropsDemo />} />
+                    <Route exact path='/hooks' element={<Hooks />} />
+                    <Route exact path='/timer' element={<TimePiecesApp />} />
                 </Routes>
             </div>
         </div>
