@@ -3,14 +3,16 @@ import React, { useState, useEffect } from "react";
 const TimerApp = () => {
 
     const [secondsElapsed, setSecondsElapsed] = useState(0);
-    // method that adds one to our variable and changes the state. React will re-render on state changes
-    const tick = () => setSecondsElapsed(secondsElapsed + 1);
+    
     // useEffect - effect that happens while this is in ues, triggered by being used? a hook?
     useEffect(() => {
         let interval = setInterval(() => tick(), 1000);
         console.log(interval);
         return() => clearInterval;
     });
+
+    // method that adds one to our variable and changes the state. React will re-render on state changes
+    const tick = () => setSecondsElapsed(secondsElapsed + 1);
 
     return(
         <div>

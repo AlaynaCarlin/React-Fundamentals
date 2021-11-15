@@ -21,7 +21,7 @@ const ClockApp = () => {
         <div>
             <h1 className='section-title'>React Clock</h1>
             <hr className="explanation" />
-            <p>{time}</p>
+            <p>Garrett {time}</p>
         </div>
     );
 };

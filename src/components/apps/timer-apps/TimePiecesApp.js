@@ -7,7 +7,7 @@ const TimePiecesApp = () => {
     return(
         <div className='main'>
             <div className="mainDiv">
-                <TimerApp />
+                {/* <TimerApp /> */}
                 <hr />
                 <ClockApp />
                 <hr />

@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";// imports useState, useEffect, and useRef
 
-const StopWatchApp = () => {
+const StopWatchApp = () => { // stopWatchApp component declaration
 
-    const startTimeRef = useRef(0);
-    const [isRunning, setIsRunning] = useState(false);
-    const [time, setTIme] = useState(0);
+    const startTimeRef = useRef(0); // reference value
+    const [isRunning, setIsRunning] = useState(false); // state values
+    const [time, setTime] = useState(0);
     const [laps, setLaps] = useState([]);
 
+    // keeps the time running
     useEffect(() => {
         if(isRunning) {
             const interval = setInterval(update, 10);
@@ -14,6 +15,14 @@ const StopWatchApp = () => {
         }
     });
 
+    // method
+    const update = () => {
+        const delta = Date.now() - startTimeRef.current;
+        setTime(time + delta);
+        startTimeRef.current = Date.now();
+    }
+
+    
     const start = () => {
         setIsRunning(true);
         startTimeRef.current = Date.now()
@@ -21,12 +30,23 @@ const StopWatchApp = () => {
     const stop = () => {
         setIsRunning(false);
     }
+    
+    const lap = () => {
+        setLaps([...laps, time]);
+    }
 
-    return (
+    const reset = () => {
+        setTime(0);
+        setLaps([]);
+    }
+
+    return ( // display
         <div>
             <h1 className="section-title">React Stopwatch</h1>
             <p>
-                {Math.floor((time / 1000) / 60).toString()} :
+                {/* math.floor = whole numbers. divide time by 1000 so we are dealing with seconds. then divide by 60 to get the minutes passed */}
+                {Math.floor((time / 1000) / 60).toString()} : 
+                {/* the modules operator on this line will give us the seconds the remain after we establish how many minutes have passed */}
                 {Math.floor((time / 1000) % 60).toString()}
             </p>
             {
