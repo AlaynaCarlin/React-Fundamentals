@@ -13,6 +13,7 @@ import PropsDemo from '../concepts/PropsDemo';
 import Hooks from '../concepts/Hooks';
 import TimePiecesApp from '../apps/timer-apps/TimePiecesApp';
 import NytApp from '../apps/nyt-app/NytApp';
+import MovieApp from '../apps/the-movie-db/MovieApp';
 
 const Sidebar = () => {
     return(
@@ -29,6 +30,7 @@ const Sidebar = () => {
                     <li><Link to='/hooks'>Hooks</Link></li>
                     <li><Link to='/timer'>Timers</Link></li>
                     <li><Link to='/nyt'>NYT</Link></li>
+                    <li><Link to='/movie'>Movie App</Link></li>
                 </ul>
             </div>
             <div className='sidebar-route'>
@@ -44,6 +46,7 @@ const Sidebar = () => {
                     <Route exact path='/hooks' element={<Hooks />} />
                     <Route exact path='/timer' element={<TimePiecesApp />} />
                     <Route exact path='/nyt' element={<NytApp />} />
+                    <Route exact path='/movie' element={<MovieApp />} />
                 </Routes>
             </div>
         </div>
