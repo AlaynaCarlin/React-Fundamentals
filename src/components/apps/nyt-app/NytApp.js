@@ -1,5 +1,6 @@
 // *Imports
 import React, {useState} from 'react';
+import NytResults from './NytResults';
 
 const baseURL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
 const key = 'OsGydTzPWGt91V7Ji4ZXzjG0oHZlIttD';
@@ -24,8 +25,10 @@ const NytApp = () => {
         // so they won't use the keyword 'this' to refer to themselves but they will refer to their parent 
     const fetchResults = () => {
         let url = `${baseURL}?api-key=${key}&page=${pageNumber}&q=${search}`;
-        url = startDate ? url + `&begin_date=${startDate}` : url;
-        url = endDate ? url + `&end_date=${endDate}` : url;
+        // console.log(url);
+        url = startDate ? url + `&begin_date=${startDate}` : url; 
+        url = endDate ? url + `&end_date=${endDate}` : url; 
+        // console.log(url);
 
         fetch(url)
         .then(res => res.json())
@@ -33,14 +36,48 @@ const NytApp = () => {
         .catch(err => console.log(err));
     };
 
+    const handleSubmit = (event) => {
+        setPageNumber(0);
+        fetchResults();
+        event.preventDefault();
+    };
+
+    const changePageNumber = (event, direction) => {
+        event.preventDefault();
+        if (direction === 'down') {
+            if (pageNumber > 0 ){
+                setPageNumber(pageNumber - 1);
+                fetchResults();
+            }
+        }
+        if (direction === 'up') {
+            setPageNumber(pageNumber + 1);
+            fetchResults();
+        }
+    }
+
     // *Display
     return(
         <div className="main">
             <div className="mainDiv">
-
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    <span>Enter a single search term (required) : </span>
+                    <input type="text" name="search" onChange={(e) => setSearch(e.target.value)} required />
+                    <br />
+                    <span>Enter a start date: </span>
+                    <input type="date" name="startDate" pattern="[0-9]{8}" onChange={(e) => setStartDate(e.target.value)} />
+                    <br />
+                    <span>Enter an end date: </span>
+                    <input type="date" name="endDate" pattern="[0-9]{8}" onChange={(e) => setEndDate(e.target.value)} />
+                    <br />
+                    <button className="submit">Submit search</button>
+                    {
+                        results.length > 0 ? <NytResults results={results} changePage={changePageNumber} /> : null
+                    }
+                </form>
             </div>
         </div>
-    )
+    );
 };
 
 // *export
